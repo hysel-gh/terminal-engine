@@ -31,7 +31,41 @@ public:
 
         return playerInfo;
     }
+    // Getters for player attributes
+    std::string getName() {
+        return name;
+    }
 
+    int getHealth() {
+        return health;
+    }
+
+    int getXpLevel() {
+        return xpLevel;
+    }
+
+    bool getIsAlive() {
+        return isAlive;
+    }
+
+    // Setters for player attributes
+    void setName(std::string name) {
+        this->name = name;
+    }   
+
+    void setHealth(int health) {
+        this->health = health;
+    }
+
+    void setXpLevel(int xpLevel) {
+        this->xpLevel = xpLevel;
+    }
+
+    void setIsAlive(bool isAlive) {
+        this->isAlive = isAlive;
+    }
+
+    // Inventory management functions
     std::string addItemToInventory(std::string item) {
         inventory.push_back(item);
         return "Item added to inventory: " + item;
