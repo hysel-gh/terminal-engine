@@ -11,6 +11,8 @@ class Player {
     int xpLevel;
     bool isAlive;
     std::vector<std::string> inventory;
+    std::string currentScene;
+
 public:
 
     Player(std::string name, int health, int xpLevel, bool isAlive, std::vector<std::string> inventory = {}) {
@@ -31,6 +33,20 @@ public:
 
         return playerInfo;
     }
+
+    // Scene functions for Player
+    void setCurrentScene(std::string sceneName) {
+        currentScene = sceneName;
+    }
+
+    std::string getCurrentScene() {
+        return currentScene;
+    }
+
+    std::string whereAmI() {
+        return "You are currently in: " + currentScene;
+    }
+
     // Getters for player attributes
     std::string getName() {
         return name;
