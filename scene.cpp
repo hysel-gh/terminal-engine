@@ -1,4 +1,5 @@
 #include "player.cpp"
+#include "npc.cpp"
 
 class Scene {
     std::string sceneName;
