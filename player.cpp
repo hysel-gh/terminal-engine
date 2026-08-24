@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include "item.cpp"
 
 // Initializes player character with basic info
 
@@ -10,18 +11,19 @@ class Player {
     int health;
     int xpLevel;
     bool isAlive;
-    std::vector<std::string> inventory;
+    std::vector<Item> inventory;
     std::string currentScene;
 
 public:
 
-    Player(std::string name, int health, int xpLevel, bool isAlive, std::vector<std::string> inventory = {}) {
-        this->name = name;
-        this->health = health;
-        this->xpLevel = xpLevel;
-        this->isAlive = isAlive;
-        this->inventory = inventory;
-    };
+    Player(std::string name, int health, int xpLevel, bool isAlive, std::vector<Item> inventory = {})
+        : name(name),
+          health(health),
+          xpLevel(xpLevel),
+          isAlive(isAlive),
+          inventory(inventory),
+          currentScene("") {
+    }
 
     std::string displayPlayerInfo() {
         std::string strName = name;
@@ -82,25 +84,28 @@ public:
     }
 
     // Inventory management functions
-    std::string addItemToInventory(std::string item) {
+    std::string addItemToInventory(Item item) {
+        if (item.getEquipable() == false) {
+            return "Item cannot be added to inventory: " + item.getItemName();
+        }
         inventory.push_back(item);
-        return "Item added to inventory: " + item;
+        return "Item added to inventory: " + item.getItemName();
     }
 
-    std::string removeItemFromInventory(std::string item) {
+    std::string removeItemFromInventory(Item item) {
         auto it = std::find(inventory.begin(), inventory.end(), item);
         if (it != inventory.end()) {
             inventory.erase(it);
-            return "Item removed from inventory: " + item;
+            return "Item removed from inventory: " + item.getItemName();
         } else {
             return "Item not found in inventory.";
         }
     }
 
-    std::string searchInventory(std::string item) {
+    std::string searchInventory(Item item) {
         auto it = std::find(inventory.begin(), inventory.end(), item);
         if (it != inventory.end()) {
-            return "Item found in inventory: " + item;
+            return "Item found in inventory: " + item.getItemName();
         } else {
             return "Item not found in inventory.";
         }
@@ -108,8 +113,8 @@ public:
 
     void displayInventory() {
         std::cout << "========= Inventory ==========" << std::endl;
-        for (const auto& item : inventory) {
-            std::cout << "- " << item << std::endl;
+        for (Item item : inventory) {
+            std::cout << "- " << item.getItemName() << std::endl;
         }
         std::cout << "===============================" << std::endl;
     }

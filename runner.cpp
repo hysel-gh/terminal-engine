@@ -20,16 +20,21 @@ int main() {
     sceneManager.swapScene(s1, s2, p1);
     p1.setCurrentScene(s2.getSceneName());
     std::cout << p1.whereAmI() << std::endl;
-    // std::cout << p1.displayPlayerInfo();
 
-    //p1.addItemToInventory("Sword");
-    //p1.addItemToInventory("Shield");
+    std::cout << s1.getSceneName() << std::endl;
 
-    //p1.displayInventory();
+    Item sword("Sword", "A sharp blade.", 100, true, false);
+    std::cout << p1.addItemToInventory(sword) << std::endl;
 
-    //p1.removeItemFromInventory("Sword");
+    p1.displayInventory();
 
-    //p1.displayInventory();
+    Item stone("Stone", "Just a regular stone.", 1, false, false);
+    std::cout << p1.addItemToInventory(stone) << std::endl;
+
+    p1.displayInventory();
+
+    std::cout << p1.removeItemFromInventory(sword) << std::endl;
+    p1.displayInventory();
 
     return 0;
 }
